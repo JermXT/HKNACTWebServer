@@ -361,10 +361,31 @@ var main = (function () {
 
 
     Terminal.prototype.vuln = function (cmdComponents) {
-    	if (cmdComponents.length < 1) {
-		this.type("This program takes 1 argument.")
-	}
-	this.type("test", this.unlock.bind(this));
+    	if (cmdComponents.length < 2) {
+		this.type("This program takes 1 argument.", this.unlock.bind(this));
+		
+	} 
+	fetch("/vuln",{
+		method: "POST", 
+      
+    		body: JSON.stringify({ 
+       			title: "foo", 
+        		body: "bar", 
+		        userId: 1 
+    		}), 
+      
+    		headers: { 
+        		"args": cmdComponents[1]
+    		} 
+
+	
+	
+	}).then(response => response.json()).then(vuln => {
+		this.type(vuln.response, this.unlock.bind(this));
+	
+	
+	});
+	//this.type("test", this.unlock.bind(this));
     }
 
     Terminal.prototype.cat = function (cmdComponents) {

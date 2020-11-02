@@ -22,13 +22,21 @@ app.get("/", (request, response) => {
   response.sendFile(__dirname + "/views/index.html");
 });
 
+/*
 // send the default array of dreams to the webpage
 app.get("/dreams", (request, response) => {
   // express helps us take JS objects and send them as JSON
   response.json(dreams);
 });
-
+*/
 // listen for requests :)
-const listener = app.listen(process.env.PORT, () => {
+const listener = app.listen(7000, () => {
   console.log("Your app is listening on port " + listener.address().port);
+});
+
+
+process.on('SIGINT', function() {
+	console.log( "\nGracefully shutting down from SIGINT (Ctrl-C)" );
+	// some other closing procedures go here
+	process.exit(1);
 });

@@ -1,52 +1,36 @@
-<!-- This is a static file -->
-<!-- served from your routes in server.js -->
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A cool thing made with Glitch">
+<html>
 
-    <title>Welcome to Glitch!</title>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTW Website Template</title>
+    <link rel="icon" href="./img/favicon.png" type="image/x-icon" />
+    <link href="./css/main.css" rel="stylesheet" type="text/css" />
+    <script src="./js/polyfills.js"></script>
+    <script src="./js/main.js"></script> </head>
 
-    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
-    <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/style.css">
+<body>
+    
+    <div id="sidenav">
+        <button id="sidenavBtn">&#9776;</button>
+        <img id="profilePic" alt="An avatar that aims to represent the website owner" src="./img/avatar.png">
+    </div>
+    
+    <div id="container">
+        <div id="output"></div>
+        <div id="input-line" class="input-line">
+            <div id="prompt" class="prompt-color"></div>&nbsp;
+            <div>
+                <input type="text" id="cmdline" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+                    autofocus/>
+            </div>
+        </div>
+    </div>
+    <!--
+    <a id="githubImg" target="_blank" href="https://github.com/luisbraganca/fake-terminal-website/">
+        <img alt="Fork me on GitHub" src="./img/github_ribbon.png"> </a>
+    -->
+</body>
 
-    <!-- import the webpage's client-side javascript file -->
-    <script src="/script.js" defer></script>
-  </head>
-  <body>
-    <header>
-      <h1>A Dream of the Future</h1>
-    </header>
-
-    <main>
-      <h2>Oh hi,</h2>
-
-      <p>Tell me your hopes and dreams:</p>
-
-      <form>
-        <label>
-          New Dream
-          <input name="dream" type="text" maxlength="100" required placeholder="Dreams!">
-        </label>
-        <button type="submit" id="submit-dream">Add Dream</button>
-      </form>
-
-      <section class="dreams">
-        <ul id="dreams">
-          <em>loading dreams&hellip;</em>
-        </ul>
-      </section>
-    </main>
-
-    <footer>Made with <a href="https://glitch.com">Glitch</a>!</footer>
-
-    <!-- include the Glitch button to show what the webpage is about and
-          to make it easier for folks to view source and remix -->
-    <div class="glitchButton" style="position:fixed;top:2em;right:20px;"></div>
-    <script src="https://button.glitch.me/button.js" defer></script>
-  </body>
 </html>

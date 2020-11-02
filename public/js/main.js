@@ -26,9 +26,10 @@ var configs = (function () {
         rmdir_help: "Remove directory, this command will only work if the folders are empty.",
         touch_help: "Change file timestamps. If the file doesn't exist, it's created an empty one.",
         sudo_help: "Execute a command as the superuser.",
-        welcome: "Welcome to FTW (Fake Terminal Website)! :)\nIn order for you to start customizing the texts, go to js/main.js and replace the texts located at the configs var.\nIn that same file, you can define all the fake files you want as well as their content. This files will appear on the sidenav.\nAlso, don't forget to change the colors on the css/main.css file as well as the website title on the index.html file.\nNow in order to get started, feel free to either execute the 'help' command or use the more user-friendly colored sidenav at your left.\nIn order to skip text rolling, double click/touch anywhere.",
+        welcome: "This is a terminal with which you can run vuln:\n ./vuln [input]",
+	//welcome: "Welcome to FTW (Fake Terminal Website)! :)\nIn order for you to start customizing the texts, go to js/main.js and replace the texts located at the configs var.\nIn that same file, you can define all the fake files you want as well as their content. This files will appear on the sidenav.\nAlso, don't forget to change the colors on the css/main.css file as well as the website title on the index.html file.\nNow in order to get started, feel free to either execute the 'help' command or use the more user-friendly colored sidenav at your left.\nIn order to skip text rolling, double click/touch anywhere.",
         internet_explorer_warning: "NOTE: I see you're using internet explorer, this website won't work properly.",
-        welcome_file_name: "welcome_message.txt",
+        //welcome_file_name: "welcome_message.txt",
         invalid_command_message: "<value>: command not found.",
         reboot_message: "Preparing to reboot...\n\n3...\n\n2...\n\n1...\n\nRebooting...\n\n",
         permission_denied_message: "Unable to '<value>', permission denied.",
@@ -67,11 +68,12 @@ var files = (function () {
         }
     };
     Singleton.defaultOptions = {
-        "about.txt": "This website was made using only pure JavaScript with no extra libraries.\nI made it dynamic so anyone can use it, just download it from GitHub and change the config text according to your needs.\nIf you manage to find any bugs or security issues feel free to email me: luisbraganca@protonmail.com",
-        "getting_started.txt": "First, go to js/main.js and replace all the text on both singleton vars.\n- configs: All the text used on the website.\n- files: All the fake files used on the website. These files are also used to be listed on the sidenav.\nAlso please notice if a file content is a raw URL, when clicked/concatenated it will be opened on a new tab.\nDon't forget also to:\n- Change the page title on the index.html file\n- Change the website color on the css/main.css\n- Change the images located at the img folder. The suggested sizes are 150x150 for the avatar and 32x32/16x16 for the favicon.",
-        "contact.txt": "mail@example.com",
-        "social_network_1.txt": "https://www.socialite.com/username/",
-        "social_network_2.txt": "https://example.com/profile/9382/"
+	"vuln": "binary data hidden"
+        //"about.txt": "This website was made using only pure JavaScript with no extra libraries.\nI made it dynamic so anyone can use it, just download it from GitHub and change the config text according to your needs.\nIf you manage to find any bugs or security issues feel free to email me: luisbraganca@protonmail.com",
+        //"getting_started.txt": "First, go to js/main.js and replace all the text on both singleton vars.\n- configs: All the text used on the website.\n- files: All the fake files used on the website. These files are also used to be listed on the sidenav.\nAlso please notice if a file content is a raw URL, when clicked/concatenated it will be opened on a new tab.\nDon't forget also to:\n- Change the page title on the index.html file\n- Change the website color on the css/main.css\n- Change the images located at the img folder. The suggested sizes are 150x150 for the avatar and 32x32/16x16 for the favicon.",
+        //"contact.txt": "mail@example.com",
+        //"social_network_1.txt": "https://www.socialite.com/username/",
+        //"social_network_2.txt": "https://example.com/profile/9382/"
     };
     return {
         getInstance: function (options) {
@@ -121,7 +123,9 @@ var main = (function () {
     var cmds = {
         LS: { value: "ls", help: configs.getInstance().ls_help },
         CAT: { value: "cat", help: configs.getInstance().cat_help },
-        WHOAMI: { value: "whoami", help: configs.getInstance().whoami_help },
+	VULN: { value: "./vuln", help: configs.getInstance().vuln_help}
+        /*
+	WHOAMI: { value: "whoami", help: configs.getInstance().whoami_help },
         DATE: { value: "date", help: configs.getInstance().date_help },
         HELP: { value: "help", help: configs.getInstance().help_help },
         CLEAR: { value: "clear", help: configs.getInstance().clear_help },
@@ -132,6 +136,7 @@ var main = (function () {
         RMDIR: { value: "rmdir", help: configs.getInstance().rmdir_help },
         TOUCH: { value: "touch", help: configs.getInstance().touch_help },
         SUDO: { value: "sudo", help: configs.getInstance().sudo_help }
+    	*/
     };
 
     var Terminal = function (prompt, cmdLine, output, sidenav, profilePic, user, host, root, outputTimer) {
@@ -178,7 +183,9 @@ var main = (function () {
         this.sidenavElements.forEach(function (elem) {
             elem.disabled = true;
         });
-        this.prepareSideNav();
+//disables sideNav
+        //this.prepareSideNav();
+//
         this.lock(); // Need to lock here since the sidenav elements were just added
         document.body.addEventListener("click", function (event) {
             if (this.sidenavOpen) {
@@ -316,7 +323,11 @@ var main = (function () {
             case cmds.LS.value:
                 this.ls();
                 break;
-            case cmds.WHOAMI.value:
+	    case cmds.VULN.value:
+                this.vuln(cmdComponents); 
+	    	break;
+	    /*
+	    case cmds.WHOAMI.value:
                 this.whoami();
                 break;
             case cmds.DATE.value:
@@ -341,11 +352,20 @@ var main = (function () {
             case cmds.SUDO.value:
                 this.sudo();
                 break;
+	    */
             default:
                 this.invalidCommand(cmdComponents);
                 break;
         };
     };
+
+
+    Terminal.prototype.vuln = function (cmdComponents) {
+    	if (cmdComponents.length < 1) {
+		this.type("This program takes 1 argument.")
+	}
+	this.type("test", this.unlock.bind(this));
+    }
 
     Terminal.prototype.cat = function (cmdComponents) {
         var result;
@@ -360,8 +380,9 @@ var main = (function () {
     };
 
     Terminal.prototype.ls = function () {
-        var result = ".\n..\n" + configs.getInstance().welcome_file_name + "\n";
-        for (var file in files.getInstance()) {
+        //var result = ".\n..\n" + configs.getInstance().welcome_file_name + "\n";
+        var result = ".\n";
+	for (var file in files.getInstance()) {
             result += file + "\n";
         }
         this.type(result.trim(), this.unlock.bind(this));

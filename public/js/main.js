@@ -26,7 +26,7 @@ var configs = (function () {
         rmdir_help: "Remove directory, this command will only work if the folders are empty.",
         touch_help: "Change file timestamps. If the file doesn't exist, it's created an empty one.",
         sudo_help: "Execute a command as the superuser.",
-        welcome: "This is a terminal with which you can run vuln:\n ./vuln [input]",
+        welcome: "Commands: ls. This is a terminal with which you can run vuln:\n ./vuln [input]",
 	//welcome: "Welcome to FTW (Fake Terminal Website)! :)\nIn order for you to start customizing the texts, go to js/main.js and replace the texts located at the configs var.\nIn that same file, you can define all the fake files you want as well as their content. This files will appear on the sidenav.\nAlso, don't forget to change the colors on the css/main.css file as well as the website title on the index.html file.\nNow in order to get started, feel free to either execute the 'help' command or use the more user-friendly colored sidenav at your left.\nIn order to skip text rolling, double click/touch anywhere.",
         internet_explorer_warning: "NOTE: I see you're using internet explorer, this website won't work properly.",
         //welcome_file_name: "welcome_message.txt",
@@ -364,7 +364,8 @@ var main = (function () {
     	if (cmdComponents.length < 2) {
 		this.type("This program takes 1 argument.", this.unlock.bind(this));
 		
-	} 
+	} else {
+	
 	fetch("/vuln",{
 		method: "POST", 
       
@@ -385,6 +386,7 @@ var main = (function () {
 	
 	
 	});
+	}
 	//this.type("test", this.unlock.bind(this));
     }
 

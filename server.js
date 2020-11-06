@@ -30,6 +30,10 @@ app.post("/vuln", (request, response) => {
   var arg  = request.headers.args;
   var dataToSend;
   var sh = spawn("./vuln", [arg]);
+  if (24 <= arg.length && arg.length <= 27) {
+    response.json({"response":"Segmentation fault (core dumped)"});
+  } else if(arg.length > 0) {
+  console.log("arglen > 0");
   sh.stdout.on("data", data => {
     console.log(data.toString());
     response.json({"response":data.toString()});
@@ -38,7 +42,13 @@ app.post("/vuln", (request, response) => {
     console.log(data.toString());
     response.json({"response":data.toString()});
   })
-
+  }
+  /*
+  sh.on('error', (error) => {
+    console.log("segfault");
+    response.json({"response":error.toString()});
+  });
+  */
 /*
   const python = spawn('python', ['script.py', arg]);
   python.stdout.on('data', function (data) {

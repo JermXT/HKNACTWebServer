@@ -1,6 +1,6 @@
 # HKNACTWebServer
 
-A simple unix terminal emulator website for a c++ puzzle for an HKN event.
+A simple unix terminal emulator website for a c++ puzzle for an HKN(eecs honor society) event.
 
 # Puzzle:
 https://docs.google.com/document/d/1iWreU64_r4V6_yFHYuEeam4qfVZ7d72AUAyVEsk69G8
